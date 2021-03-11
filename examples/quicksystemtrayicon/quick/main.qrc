@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>QtIcon.png</file>
+        <file>bad.png</file>
+        <file>heart.png</file>
+        <file>trash.png</file>
     </qresource>
 </RCC>

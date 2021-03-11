@@ -3,14 +3,13 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QIcon>
-#include <QtQuickSystemTrayIcon/qtquicksystemtrayiconglobal.h>
 
 QT_BEGIN_NAMESPACE
 
 class QQuickImage;
 class QQuickMenu;
 
-class Q_QUICKSYSTEMTRAYICON_EXPORT QQuickSystemTrayIcon : public QObject
+class QQuickSystemTrayIcon : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool systemTrayAvailable READ isSystemTrayAvailable CONSTANT)

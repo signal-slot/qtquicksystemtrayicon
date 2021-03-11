@@ -19,15 +19,19 @@ Window {
         Label {
             text: 'Icon'
         }
-        Image {
-            fillMode: Image.PreserveAspectFit
-            source: 'QtIcon.png'
-            sourceSize: Qt.size(64, 64)
-            width: 64
-            height: 64
-            Layout.preferredHeight: 64
+        Row {
+            Repeater {
+                model: ['heart.png', 'trash.png', 'bad.png']
+                Image {
+                    source: model.modelData
+                    sourceSize: Qt.size(64, 64)
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: image.source = model.modelData
+                    }
+                }
+            }
         }
-
         Label {
             text: 'ToolTip'
         }
@@ -115,13 +119,11 @@ Click this balloon for details."
         id: systemTrayIcon
         quitOnLastWindowClosed: false
         visible: true
-        icon: Image { source: 'QtIcon.png' }
+        icon: Image {
+            id: image
+            source: 'heart.png'
+        }
         contextMenu: Menu {
-            Action {
-                icon.source: 'QtIcon.png'
-                text: qsTr("About")
-                onTriggered: window.show()
-            }
             Action {
                 icon.name: 'document-open'
                 text: qsTr("Open")

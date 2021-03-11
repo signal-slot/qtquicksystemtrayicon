@@ -149,7 +149,6 @@ void QQuickSystemTrayIcon::Private::updateContextMenu(QPlatformMenu *platformMen
             setText(action->text());
 
             auto setIcon = [=](const QQuickIcon &quickIcon) {
-                qDebug() << quickIcon.source() << quickIcon.source().toLocalFile() << QQmlFile::urlToLocalFileOrQrc(quickIcon.source());
                 const auto icon = QIcon::fromTheme(quickIcon.name(), QIcon(QQmlFile::urlToLocalFileOrQrc(quickIcon.source())));
                 platformMenuItem->setIcon(icon);
                 platformMenu->syncMenuItem(platformMenuItem);
@@ -219,24 +218,26 @@ void QQuickSystemTrayIcon::Private::updateContextMenu(QPlatformMenu *platformMen
 
 void QQuickSystemTrayIcon::Private::showMessage(const QString &title, const QString &message, QQuickSystemTrayIcon::MessageIcon icon, int msecs)
 {
-    QIcon i;
+    const auto theme = QGuiApplicationPrivate::platformTheme();
+    const auto size = platformSystemTrayIcon->geometry().size();
+    QPixmap pixmap;
     switch (icon) {
     case NoIcon:
         break;
     case Information:
-        i = QIcon::fromTheme(QStringLiteral("dialog-information"));
+        pixmap = theme->standardPixmap(QPlatformTheme::MessageBoxInformation, size);
         break;
     case Warning:
-        i = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        pixmap = theme->standardPixmap(QPlatformTheme::MessageBoxWarning, size);
         break;
     case Critical:
-        i = QIcon::fromTheme(QStringLiteral("dialog-error"));
+        pixmap = theme->standardPixmap(QPlatformTheme::MessageBoxCritical, size);
         break;
     default:
         break;
     }
 
-    platformSystemTrayIcon->showMessage(title, message, i, static_cast<QPlatformSystemTrayIcon::MessageIcon>(icon), msecs);
+    platformSystemTrayIcon->showMessage(title, message, QIcon(pixmap), static_cast<QPlatformSystemTrayIcon::MessageIcon>(icon), msecs);
 }
 
 

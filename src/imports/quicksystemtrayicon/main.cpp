@@ -1,6 +1,6 @@
 #include <QtQml/QQmlExtensionPlugin>
 #include <QtQml/qqml.h>
-#include <QtQuickSystemTrayIcon/QQuickSystemTrayIcon>
+#include "qquicksystemtrayicon.h"
 
 QT_BEGIN_NAMESPACE
 
