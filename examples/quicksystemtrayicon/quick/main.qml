@@ -10,6 +10,7 @@ Window {
     height: 500
     title: 'QtQuick.SystemTrayIcon'
     visible: !systemTrayIcon.systemTrayAvailable
+    property url iconUrl: image.source
 
     GridLayout {
         anchors.fill: parent
@@ -146,5 +147,6 @@ Click this balloon for details."
         toolTip: toolTip.text
 
         onActivated: window.visible = !window.visible
+        onMessageClicked: console.debug('clicked')
     }
 }
