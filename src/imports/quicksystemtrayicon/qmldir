@@ -1,0 +1,4 @@
+module QtQuick.SystemTrayIcon
+plugin declarative_quicksystemtrayicon
+classname QtQuickSystemTrayIconDeclarativeModule
+typeinfo plugins.qmltypes
